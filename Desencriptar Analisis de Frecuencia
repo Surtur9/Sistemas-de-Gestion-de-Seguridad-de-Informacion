@@ -1,0 +1,41 @@
+# Definimos una función para calcular la frecuencia de las letras en el mensaje
+def calcular_frecuencia(texto):
+    frecuencia = {}  # Creamos un diccionario para almacenar la frecuencia de las letras
+    for letra in texto:  # Iteramos a través de cada carácter en el texto
+        if letra.isalpha():  # Verificamos si el carácter es una letra
+            if letra in frecuencia:  # Si la letra ya está en el diccionario de frecuencias, incrementamos su conteo
+                frecuencia[letra] += 1
+            else:  # Si no está en el diccionario, la inicializamos con un conteo de 1
+                frecuencia[letra] = 1
+    return frecuencia  # Devolvemos el diccionario de frecuencias
+
+# Función para descifrar el mensaje usando el análisis de frecuencias
+def descifrar_mensaje(cifrado):
+    frecuencia_cifrado = calcular_frecuencia(cifrado)  # Calculamos la frecuencia de las letras en el mensaje cifrado
+
+    # Utilizamos las letras más frecuentes en español
+    letras_espanol = 'EAOLSNDRUITCPMYQBHGFVJÑZXKW'  # Basado en la frecuencia de letras en español
+    letras_ordenadas = sorted(frecuencia_cifrado, key=lambda letra: frecuencia_cifrado[letra], reverse=True)
+
+    # Creamos un mapeo de letras para realizar la sustitución
+    mapeo = {}
+    for i in range(len(letras_espanol)):
+        mapeo[letras_ordenadas[i]] = letras_espanol[i]
+
+    mensaje_descifrado = ''  # Inicializamos una cadena vacía para el mensaje descifrado
+    for letra in cifrado:  # Iteramos a través de cada carácter en el mensaje cifrado
+        if letra.isalpha():  # Verificamos si el carácter es una letra
+            mensaje_descifrado += mapeo[letra]  # Agregamos la letra descifrada al mensaje descifrado
+        else:
+            mensaje_descifrado += letra  # Si no es una letra (por ejemplo, un espacio o signo de puntuación), lo dejamos igual
+
+    return mensaje_descifrado  # Devolvemos el mensaje descifrado
+
+# Mensaje cifrado
+mensaje_cifrado = "RIJ AZKKZHC PIKCE XT ACKCUXJHX SZX, E NZ PEJXKE, PXGIK XFDKXNEQE RIPI RIPQEHCK ET OENRCNPI AXNAX ZJ RKCHXKCI AX CJAXDXJAXJRCE AX RTENX, E ACOXKXJRCE AXT RITEQIKERCIJCNPI OKXJHXDIDZTCNHE AX TE ACKXRRCIJ EJEKSZCNHE. AZKKZHC OZX ZJ OERHIK AX DKCPXK IKAXJ XJ XT DEDXT AX TE RTENX IQKXKE XJ REHETZJVE XJ GZTCI AX 1936. DXKI AZKKZHC, RIPI IRZKKX RIJ TEN DXKNIJETCAEAXN XJ TE MCNHIKCE, JI REVI AXT RCXTI. DXKNIJCOCREQE TE HKEACRCIJ KXvITZRCIJEKCE AX TE RTENX IQKXKE. NZ XJIKPX DIDZTEKCAEA XJHKX TE RTENX HKEQEGEAIKE, KXOTXGEAE XJ XT XJHCXKKI PZTHCHZACJEKCI XJ QEKRXTIJE XT 22 AX JIvCXPQKX AX 1936, PZXNHKE XNE CAXJHCOCRERCIJ. NZ PZXKHX OZX NCJ AZAE ZJ UITDX IQGXHCvI ET DKIRXNI KXvITZRCIJEKCI XJ PEKRME. NCJ AZKKZHC SZXAI PEN TCQKX XT REPCJI DEKE SZX XT XNHETCJCNPI, RIJ TE RIPDTCRCAEA AXT UIQCXKJI AXT OKXJHX DIDZTEK V AX TE ACKXRRCIJ EJEKSZCNHE, HXKPCJEKE XJ PEVI AX 1937 TE HEKXE AX TCSZCAEK TE KXvITZRCIJE, AXNPIKETCLEJAI E TE RTENX IQKXKE V OERCTCHEJAI RIJ XTTI XT DINHXKCIK HKCZJOI OKEJSZCNHE."
+
+# Desciframos el mensaje
+mensaje_descifrado = descifrar_mensaje(mensaje_cifrado)
+
+# Imprimimos el mensaje descifrado
+print(mensaje_descifrado)
