@@ -1,7 +1,10 @@
 def calcular_frecuencia(texto):
     frecuencia = {}
+    letras_validas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÑ'
+    
     for letra in texto:
-        if letra.isalpha():
+        letra = letra.upper()  # Convertimos la letra a mayúscula para hacer la comparación
+        if letra in letras_validas:
             if letra in frecuencia:
                 frecuencia[letra] += 1
             else:
@@ -17,7 +20,8 @@ def descifrar_mensaje(cifrado):
         mapeo[letras_ordenadas[i]] = letras_espanol[i]
     mensaje_descifrado = ''
     for letra in cifrado:
-        if letra.isalpha():
+        letra = letra.upper()  # Convertimos la letra a mayúscula para hacer la comparación
+        if letra in letras_validas:
             mensaje_descifrado += mapeo[letra]
         else:
             mensaje_descifrado += letra
