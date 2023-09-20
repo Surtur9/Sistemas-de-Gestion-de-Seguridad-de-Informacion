@@ -16,7 +16,7 @@ def descifrar_mensaje(cifrado):
     letras_espanol = 'EAOLSNDRUITCPMYQBHGFVJÑZXKW'
     letras_ordenadas = sorted(frecuencia_cifrado, key=lambda letra: frecuencia_cifrado[letra], reverse=True)
     mapeo = {}
-    for i in range(len(letras_espanol)):
+    for i in range(min(len(letras_espanol), len(letras_ordenadas))):  # Usamos el mínimo de ambas longitudes
         mapeo[letras_ordenadas[i]] = letras_espanol[i]
     mensaje_descifrado = ''
     for letra in cifrado:
